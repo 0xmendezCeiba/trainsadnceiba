@@ -1,8 +1,11 @@
+import { Injectable } from '@nestjs/common';
+
 import { BalanceChange } from '../model/balance-change';
 import { ClientRepository } from '../port/repository/client.repository';
 import { Client } from '../model/client';
 import { NotFoundError } from 'src/domain/errors/not-found.error';
 
+@Injectable()
 export class IncreaseBalanceService {
 
   constructor(private readonly clientRepository: ClientRepository) {}

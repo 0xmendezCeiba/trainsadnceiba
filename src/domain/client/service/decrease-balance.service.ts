@@ -6,7 +6,7 @@ import { ClientRepository } from '../port/repository/client.repository';
 import { Client } from '../model/client';
 import { NotFoundError } from 'src/domain/errors/not-found.error';
 
-Injectable()
+@Injectable()
 export class DecreaseBalanceService {
 
   constructor(private readonly clientRepository: ClientRepository) {}
