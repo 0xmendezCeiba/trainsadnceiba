@@ -14,7 +14,6 @@ import { DecreaseBalanceService } from 'src/domain/client/service/decrease-balan
 import { ClientRepository } from 'src/domain/client/port/repository/client.repository';
 import { clientRepositoryProvider } from './repository/client-repository.provider';
 
-
 @Module({
   imports: [TypeOrmModule.forFeature([ClientEntity])],
   providers: [

@@ -41,7 +41,7 @@ export class AssignRouteService {
     return this.routeAssignRepository.create(routeAssign);
   }
 
-  public async isAvalaibleRouteAssignWithId(id: number): Promise<Boolean> {
+  public async isAvalaibleRouteAssignWithId(id: number): Promise<boolean> {
     const routeAssign = await this.routeAssignRepository.getById(id);
     if (!routeAssign) {
       throw new NotFoundError('Route assign not found');
@@ -50,7 +50,7 @@ export class AssignRouteService {
     return routeAssign.getStartAt.getTime() > currentDate.getTime();
   }
 
-  public async routeAssignExistsWithId(id: number): Promise<Boolean> {
+  public async routeAssignExistsWithId(id: number): Promise<boolean> {
     const routeAssign = await this.routeAssignRepository.getById(id);
     return routeAssign !== null;
   }
