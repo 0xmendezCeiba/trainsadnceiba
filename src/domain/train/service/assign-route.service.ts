@@ -1,6 +1,6 @@
-import { RouteAssign } from "../model/route-assign";
-import { CreateTrainService } from "../service/create-train.service";
-import { RouteAssignRepository } from "../port/repository/route-assign.repository";
+import { RouteAssign } from '../model/route-assign';
+import { CreateTrainService } from '../service/create-train.service';
+import { RouteAssignRepository } from '../port/repository/route-assign.repository';
 import { DomainError } from 'src/domain/errors/domain.error'
 import { NotFoundError } from 'src/domain/errors/not-found.error'
 

@@ -2,7 +2,7 @@ import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from '@nestjs/commo
 import { Request, Response } from 'express';
 import { DomainError } from 'src/domain/errors/domain.error';
 import { Message } from './message';
-import { AppLogger } from '../configuracion/ceiba-logger.service';
+import { AppLogger } from '../configuration/ceiba-logger.service';
 
 @Catch(DomainError)
 export class DomainExceptionsFilter implements ExceptionFilter {

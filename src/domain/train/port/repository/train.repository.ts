@@ -1,4 +1,4 @@
-import { Train } from "../../model/train";
+import { Train } from '../../model/train';
 
 export abstract class TrainRepository {
 

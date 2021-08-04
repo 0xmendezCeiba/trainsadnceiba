@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 
 import { Client } from 'src/domain/client/model/client';
 import { ClientRepository } from 'src/domain/client/port/repository/client.repository';
-import { ClientEntity } from "../../entity/client.entity";
+import { ClientEntity } from '../../entity/client.entity';
 
 @Injectable()
 export class ClientRepositoryPostgres implements ClientRepository {

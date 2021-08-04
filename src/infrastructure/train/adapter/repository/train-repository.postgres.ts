@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Train } from 'src/domain/train/model/train';
-import { TrainEntity } from "../../entity/train.entity";
+import { TrainEntity } from '../../entity/train.entity';
 import { TrainRepository } from 'src/domain/train/port/repository/train.repository';
 
 @Injectable()

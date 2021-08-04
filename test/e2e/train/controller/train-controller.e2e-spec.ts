@@ -26,7 +26,7 @@ import { AddPassengerCommand } from 'src/application/train/command/add-passenger
 import { AssignRouteHandler } from 'src/application/train/command/assign-route.handler';
 import { RouteAssign } from 'src/domain/train/model/route-assign';
 import { AssignRouteCommand } from 'src/application/train/command/assign-route.command';
-import { AppLogger } from 'src/infrastructure/configuracion/ceiba-logger.service';
+import { AppLogger } from 'src/infrastructure/configuration/ceiba-logger.service';
 import { createSandbox, SinonStubbedInstance } from 'sinon';
 import { createStubObj } from '../../../util/create-object.stub';
 import { Client } from 'src/domain/client/model/client';
@@ -159,13 +159,13 @@ describe('Trains controller test', () => {
     const expectedData = {
       color: train.color,
       passengerLimit: train.passengerLimit,
-      createdAt: "2021-08-03T16:41:03.919Z",
+      createdAt: '2021-08-03T16:41:03.919Z',
       id: 6,
     };
     trainRepository.create.returns(Promise.resolve({
       color: train.color,
       passengerLimit: train.passengerLimit,
-      createdAt: "2021-08-03T16:41:03.919Z",
+      createdAt: '2021-08-03T16:41:03.919Z',
       id: 6,
     }));
   

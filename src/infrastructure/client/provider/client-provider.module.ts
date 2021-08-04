@@ -12,7 +12,7 @@ import { CreateClientService } from 'src/domain/client/service/create-client.ser
 import { IncreaseBalanceService } from 'src/domain/client/service/increase-balance.service';
 import { DecreaseBalanceService } from 'src/domain/client/service/decrease-balance.service';
 import { ClientRepository } from 'src/domain/client/port/repository/client.repository';
-import { clientRepositoryProvider } from "./repository/client-repository.provider";
+import { clientRepositoryProvider } from './repository/client-repository.provider';
 
 
 @Module({

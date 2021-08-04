@@ -2,10 +2,10 @@ import {Controller, Post, UsePipes, Body, ValidationPipe } from '@nestjs/common'
 
 import { CreateTrainCommand } from 'src/application/train/command/create-train.command';
 import { AssignRouteCommand } from 'src/application/train/command/assign-route.command';
-import { CreateTrainHandler } from "src/application/train/command/create-train.handler";
-import { AssignRouteHandler } from "src/application/train/command/assign-route.handler";
-import { AddPassengerCommand } from "src/application/train/command/add-passenger.command";
-import { AddPassengerHandler } from "src/application/train/command/add-passenger.handler";
+import { CreateTrainHandler } from 'src/application/train/command/create-train.handler';
+import { AssignRouteHandler } from 'src/application/train/command/assign-route.handler';
+import { AddPassengerCommand } from 'src/application/train/command/add-passenger.command';
+import { AddPassengerHandler } from 'src/application/train/command/add-passenger.handler';
 
 @Controller('trains')
 export class TrainController {

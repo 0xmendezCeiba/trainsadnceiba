@@ -1,13 +1,12 @@
 import * as Joi from '@hapi/joi';
 import { Module } from '@nestjs/common';
-import { UsuarioModule } from './usuario/usuario.module';
 import { ClientModule } from './client/client.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppLogger } from './configuracion/ceiba-logger.service';
+import { AppLogger } from './configuration/ceiba-logger.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { NodeEnv } from './configuracion/environment/env-node.enum';
-import { databaseConfigFactory } from './configuracion/database.config';
-import { TrainModule } from "./train/train.module";
+import { NodeEnv } from './configuration/environment/env-node.enum';
+import { databaseConfigFactory } from './configuration/database.config';
+import { TrainModule } from './train/train.module';
 
 @Module({
   providers: [AppLogger],
@@ -25,7 +24,6 @@ import { TrainModule } from "./train/train.module";
           .required(),
       }),
     }),
-    UsuarioModule,
     ClientModule,
     TrainModule,
   ],

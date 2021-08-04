@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { CreateTrainCommand } from "./create-train.command";
-import { CreateTrainService } from "src/domain/train/service/create-train.service";
+import { CreateTrainCommand } from './create-train.command';
+import { CreateTrainService } from 'src/domain/train/service/create-train.service';
 import { Train } from 'src/domain/train/model/train';
 
 @Injectable()

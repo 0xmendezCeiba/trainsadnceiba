@@ -1,11 +1,11 @@
-import { PassengerBoarding } from "../model/passenger-boarding";
-import { PassengerBoardingRepository } from "../port/repository/passenger-boarding.repository";
-import { AssignRouteService } from "./assign-route.service";
-import { CreateClientService } from "src/domain/client/service/create-client.service";
+import { PassengerBoarding } from '../model/passenger-boarding';
+import { PassengerBoardingRepository } from '../port/repository/passenger-boarding.repository';
+import { AssignRouteService } from './assign-route.service';
+import { CreateClientService } from 'src/domain/client/service/create-client.service';
 import { NotFoundError } from 'src/domain/errors/not-found.error';
 import { DomainError } from 'src/domain/errors/domain.error';
-import { DecreaseBalanceService } from "src/domain/client/service/decrease-balance.service";
-import { BalanceChange } from "src/domain/client/model/balance-change";
+import { DecreaseBalanceService } from 'src/domain/client/service/decrease-balance.service';
+import { BalanceChange } from 'src/domain/client/model/balance-change';
 
 export class AddPassengerService {
 

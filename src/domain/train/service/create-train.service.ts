@@ -1,7 +1,7 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { Train } from "../model/train";
-import { TrainRepository } from "../port/repository/train.repository";
+import { Train } from '../model/train';
+import { TrainRepository } from '../port/repository/train.repository';
 
 @Injectable()
 export class CreateTrainService {

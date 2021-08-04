@@ -2,7 +2,7 @@ import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from '@nestjs/commo
 import { Request, Response } from 'express';
 import { NotFoundError } from 'src/domain/errors/not-found.error';
 import { Message } from './message';
-import { AppLogger } from '../configuracion/ceiba-logger.service';
+import { AppLogger } from '../configuration/ceiba-logger.service';
 
 @Catch(NotFoundError)
 export class NotFoundExceptionsFilter implements ExceptionFilter {

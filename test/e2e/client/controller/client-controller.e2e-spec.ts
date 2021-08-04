@@ -14,7 +14,7 @@ import { CreateClientHandler } from 'src/application/client/command/create-clien
 import { IncreaseBalanceHandler } from 'src/application/client/command/increase-balance.handler';
 import { CreateClientCommand } from 'src/application/client/command/create-client.command';
 import { IncreaseBalanceCommand } from 'src/application/client/command/increase-balance.command';
-import { AppLogger } from 'src/infrastructure/configuracion/ceiba-logger.service';
+import { AppLogger } from 'src/infrastructure/configuration/ceiba-logger.service';
 import { createSandbox, SinonStubbedInstance } from 'sinon';
 import { createStubObj } from '../../../util/create-object.stub';
 import { Client } from 'src/domain/client/model/client';
@@ -180,7 +180,7 @@ describe('Clients controller test', () => {
       fullName: 'User',
       balance: 30,
       identityCode: '12345',
-      createdAt: "2021-08-03T14:13:22.200Z",
+      createdAt: '2021-08-03T14:13:22.200Z',
       id: 6
     }));
 
@@ -188,7 +188,7 @@ describe('Clients controller test', () => {
       fullName: 'User',
       balance: 30,
       identityCode: '12345',
-      createdAt: "2021-08-03T14:13:22.200Z",
+      createdAt: '2021-08-03T14:13:22.200Z',
       id: 6
     };
   
@@ -210,7 +210,7 @@ describe('Clients controller test', () => {
       fullName: client.fullName,
       balance: client.balance,
       identityCode: client.identityCode,
-      createdAt: "2021-08-03T14:13:22.200Z",
+      createdAt: '2021-08-03T14:13:22.200Z',
       id: 3
     }));
 
@@ -218,7 +218,7 @@ describe('Clients controller test', () => {
       fullName: client.fullName,
       balance: client.balance,
       identityCode: client.identityCode,
-      createdAt: "2021-08-03T14:13:22.200Z",
+      createdAt: '2021-08-03T14:13:22.200Z',
       id: 3
     };
   

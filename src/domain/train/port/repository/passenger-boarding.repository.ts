@@ -1,4 +1,4 @@
-import { PassengerBoarding } from "../../model/passenger-boarding";
+import { PassengerBoarding } from '../../model/passenger-boarding';
 
 export abstract class PassengerBoardingRepository {
 

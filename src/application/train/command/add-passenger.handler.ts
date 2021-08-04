@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import { AddPassengerCommand } from "./add-passenger.command";
-import { PassengerBoarding } from "src/domain/train/model/passenger-boarding";
-import { AddPassengerService } from "src/domain/train/service/add-passenger.service";
+import { AddPassengerCommand } from './add-passenger.command';
+import { PassengerBoarding } from 'src/domain/train/model/passenger-boarding';
+import { AddPassengerService } from 'src/domain/train/service/add-passenger.service';
 
 @Injectable()
 export class AddPassengerHandler {

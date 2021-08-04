@@ -1,4 +1,4 @@
-import { InvalidValueError } from "src/domain/errors/invalid-value.error";
+import { InvalidValueError } from 'src/domain/errors/invalid-value.error';
 
 const MINIMUM_PASSENGER_LIMIT = 1;
 const REQUIRED_COLOR_LENGTH = 7;

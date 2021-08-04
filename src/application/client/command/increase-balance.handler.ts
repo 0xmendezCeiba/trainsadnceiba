@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import { IncreaseBalanceService } from "src/domain/client/service/increase-balance.service";
-import { BalanceChange } from "src/domain/client/model/balance-change";
-import { IncreaseBalanceCommand } from "./increase-balance.command";
+import { IncreaseBalanceService } from 'src/domain/client/service/increase-balance.service';
+import { BalanceChange } from 'src/domain/client/model/balance-change';
+import { IncreaseBalanceCommand } from './increase-balance.command';
 
 @Injectable()
 export class IncreaseBalanceHandler {

@@ -1,4 +1,4 @@
-import { RouteAssign } from "../../model/route-assign";
+import { RouteAssign } from '../../model/route-assign';
 
 export abstract class RouteAssignRepository {
 

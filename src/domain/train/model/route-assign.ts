@@ -1,4 +1,4 @@
-import { InvalidValueError } from "src/domain/errors/invalid-value.error";
+import { InvalidValueError } from 'src/domain/errors/invalid-value.error';
 
 const MINIMUM_PASSENGER_PRICE = 0;
 

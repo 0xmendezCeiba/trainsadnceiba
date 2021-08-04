@@ -3,7 +3,7 @@ import { Repository, In, Not, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { RouteAssign } from 'src/domain/train/model/route-assign';
-import { RouteAssignEntity } from "../../entity/route-assign.entity";
+import { RouteAssignEntity } from '../../entity/route-assign.entity';
 import { RouteAssignRepository } from 'src/domain/train/port/repository/route-assign.repository';
 
 @Injectable()
