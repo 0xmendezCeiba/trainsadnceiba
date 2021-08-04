@@ -1,9 +1,9 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
+import {MigrationInterface, QueryRunner} from 'typeorm';
 
 export class createRouteAssignTable1627872815556 implements MigrationInterface {
   name = 'createRouteAssignTable1627872815556';
 
-  public async up(queryRunner: QueryRunner): Promise<any> {
+  public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
       `CREATE TABLE "RouteAssign" (
         "id" SERIAL PRIMARY KEY,
@@ -18,7 +18,7 @@ export class createRouteAssignTable1627872815556 implements MigrationInterface {
       , undefined);
   }
 
-  public async down(queryRunner: QueryRunner): Promise<any> {
+  public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('DROP TABLE "RouteAssign";', undefined);
   }
 

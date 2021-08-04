@@ -1,9 +1,9 @@
-import { MigrationInterface, QueryRunner } from "typeorm";
+import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export class createClientTable1627667938707 implements MigrationInterface {
   name = 'createClientTable1627667938707';
 
-  public async up(queryRunner: QueryRunner): Promise<any> {
+  public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
       `CREATE TABLE "Client" (
         "id" SERIAL PRIMARY KEY,
@@ -17,7 +17,7 @@ export class createClientTable1627667938707 implements MigrationInterface {
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<any> {
+  public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('DROP TABLE "Client"', undefined);
   }
 

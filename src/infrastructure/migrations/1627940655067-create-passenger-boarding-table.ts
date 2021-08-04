@@ -1,9 +1,9 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
+import {MigrationInterface, QueryRunner} from 'typeorm';
 
 export class createPassengerBoardingTable1627940655067 implements MigrationInterface {
   name = 'createPassengerBoardingTable1627940655067';
 
-  public async up(queryRunner: QueryRunner): Promise<any> {
+  public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
       `CREATE TABLE "PassengerBoarding" (
         "id" SERIAL PRIMARY KEY,
@@ -16,7 +16,7 @@ export class createPassengerBoardingTable1627940655067 implements MigrationInter
       , undefined);
   }
   
-  public async down(queryRunner: QueryRunner): Promise<any> {
+  public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('DROP TABLE "PassengerBoarding";', undefined);
   }
 
