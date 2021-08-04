@@ -28,7 +28,9 @@ export class PassengerBoardingRepositoryPostgres implements PassengerBoardingRep
       where: { clientId },
       order: { createdAt: 'DESC' },
     });
-    if (record) return new PassengerBoarding(record.routeAssignId, record.clientId);
+    if (record) {
+      return new PassengerBoarding(record.routeAssignId, record.clientId);
+    }
     return null;
   }
 

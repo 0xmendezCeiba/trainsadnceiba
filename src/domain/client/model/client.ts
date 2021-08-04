@@ -19,15 +19,21 @@ export class Client {
 
   private validateMinimumBalance(balance: number) {
     const isValidBalance = balance > MINIMUM_BALANCE;
-    if (!isValidBalance) throw new InvalidValueError(`The balance value must be greater than ${MINIMUM_BALANCE}`);
+    if (!isValidBalance) {
+      throw new InvalidValueError(`The balance value must be greater than ${MINIMUM_BALANCE}`);
+    }
   }
 
   private validateNotEmptyIdentityCode(identityCode: string) {
-    if (!identityCode.length) throw new InvalidValueError(`The identity code value must not be empty`);
+    if (!identityCode.length) {
+      throw new InvalidValueError(`The identity code value must not be empty`);
+    }
   }
 
   private validateNotEmptyFullName(fullName: string) {
-    if (!fullName.length) throw new InvalidValueError(`The full name value must not be empty`);
+    if (!fullName.length) {
+      throw new InvalidValueError(`The full name value must not be empty`);
+    }
   }
 
   get getFullName(): string {

@@ -18,30 +18,40 @@ export class AddPassengerService {
 
   private async validateClientExists(clientId: number) {
     const clientExists = await this.createClientService.clientExists(clientId);
-    if (!clientExists) throw new NotFoundError('Client not found');
+    if (!clientExists) {
+      throw new NotFoundError('Client not found');
+    }
   }
 
   private async validateRouteAssignExists(routeAssignId: number) {
     const routeAssignExists = await this.assignRouteService.routeAssignExistsWithId(routeAssignId);
-    if (!routeAssignExists) throw new NotFoundError('Route assign not found');
+    if (!routeAssignExists) {
+      throw new NotFoundError('Route assign not found');
+    }
   }
 
   private async validateRouteAssignAvailable(routeAssignId: number) {
     const routeAssignAvailable = await this.assignRouteService.isAvalaibleRouteAssignWithId(routeAssignId);
-    if (!routeAssignAvailable) throw new DomainError('Route assign not available');
+    if (!routeAssignAvailable) {
+      throw new DomainError('Route assign not available');
+    }
   }
 
   private async validateWithLastPassengerBoarding(passengerBoarding: PassengerBoarding) {
     const lastPassengerBoarding = await this.passengerBoardingRepository.getLastPassengerBoardingForClient(passengerBoarding.getClientId);
     if (lastPassengerBoarding) {
       const isDuplicatedBoarding = lastPassengerBoarding.getRouteAssignId === passengerBoarding.getRouteAssignId;
-      if (isDuplicatedBoarding) throw new DomainError('Duplicated passenger boarding');
+      if (isDuplicatedBoarding) {
+        throw new DomainError('Duplicated passenger boarding');
+      }
       
       const currentRouteAssign = await this.assignRouteService.getById(passengerBoarding.getRouteAssignId);
       const lastRouteAssign = await this.assignRouteService.getById(lastPassengerBoarding.getRouteAssignId);
       const isValidOverlappingRoad = currentRouteAssign.getEndAt.getTime() < lastRouteAssign.getStartAt.getTime() ||
         lastRouteAssign.getEndAt.getTime() < currentRouteAssign.getStartAt.getTime();
-      if (!isValidOverlappingRoad) throw new DomainError('Overlapping routes assing');
+      if (!isValidOverlappingRoad) {
+        throw new DomainError('Overlapping routes assing');
+      }
     }
   }
 

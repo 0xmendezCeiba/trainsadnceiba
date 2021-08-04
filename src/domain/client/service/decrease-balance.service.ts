@@ -13,13 +13,17 @@ export class DecreaseBalanceService {
 
   private async validateClientExists(clientId: number): Promise<Client> {
     const client = await this.clientRepository.getById(clientId);
-    if (!client) throw new NotFoundError('Client not found');
+    if (!client) {
+      throw new NotFoundError('Client not found');
+    }
     return client;
   }
 
   private async validateDecrementValue(balance: number, value: number) {
     const isValidDecrement = (balance - value) >= 0;
-    if (!isValidDecrement) throw new DomainError('Insufficient balance');
+    if (!isValidDecrement) {
+      throw new DomainError('Insufficient balance');
+    }
   }
 
   public async execute(decreaseBalance: BalanceChange) {

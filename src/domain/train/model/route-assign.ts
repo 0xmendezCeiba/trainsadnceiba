@@ -23,16 +23,22 @@ export class RouteAssign {
 
   private validateMinimumPassengerPrice(passsengerPrice: number) {
     const isValidPassengerPrice = passsengerPrice >= MINIMUM_PASSENGER_PRICE;
-    if (!isValidPassengerPrice) throw new InvalidValueError(`The passenger price value must be greater or equal to ${MINIMUM_PASSENGER_PRICE}`);
+    if (!isValidPassengerPrice) {
+      throw new InvalidValueError(`The passenger price value must be greater or equal to ${MINIMUM_PASSENGER_PRICE}`);
+    }
   }
 
   private validateNotEmptyRoadCode(roadCode: string) {
-    if (!roadCode.length) throw new InvalidValueError('The road code value is empty');
+    if (!roadCode.length) {
+      throw new InvalidValueError('The road code value is empty');
+    }
   }
   
   private validateTimeInterval(startAt: Date, endAt: Date) {
     const isValidTimeInterval = startAt.getTime() < endAt.getTime();
-    if (!isValidTimeInterval) throw new InvalidValueError('The time interval is invalid');
+    if (!isValidTimeInterval) {
+      throw new InvalidValueError('The time interval is invalid');
+    }
   }
 
   get getTrainId() {

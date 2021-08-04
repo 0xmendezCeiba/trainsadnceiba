@@ -17,11 +17,15 @@ export class Train {
 
   private validateMinimumPassengerLimit(passsengerLimit: number) {
     const isValidPassengerLimit = Number.isInteger(passsengerLimit) && passsengerLimit >= MINIMUM_PASSENGER_LIMIT;
-    if (!isValidPassengerLimit) throw new InvalidValueError(`The passenger limit value must be an integer greater or equal to ${MINIMUM_PASSENGER_LIMIT}`);
+    if (!isValidPassengerLimit) {
+      throw new InvalidValueError(`The passenger limit value must be an integer greater or equal to ${MINIMUM_PASSENGER_LIMIT}`);
+    }
   }
 
   private validateRequiredColorLength(color: string) {
-    if (color.length !== 7) throw new InvalidValueError(`The color length must be ${REQUIRED_COLOR_LENGTH}`);
+    if (color.length !== 7) {
+      throw new InvalidValueError(`The color length must be ${REQUIRED_COLOR_LENGTH}`);
+    }
   }
 
   get getPassengerLimit(): number {

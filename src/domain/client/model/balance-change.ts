@@ -15,7 +15,9 @@ export class BalanceChange {
 
   private validateMinimumValue(value: number) {
     const isValidValue = value > MINIMUM_VALUE;
-    if (!isValidValue) throw new InvalidValueError(`The value must be greater than ${MINIMUM_VALUE}`);
+    if (!isValidValue) {
+      throw new InvalidValueError(`The value must be greater than ${MINIMUM_VALUE}`);
+    }
   }
 
   get getClientId() {

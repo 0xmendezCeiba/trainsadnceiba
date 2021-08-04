@@ -9,7 +9,9 @@ export class IncreaseBalanceService {
 
   private async validateClientExists(clientId: number): Promise<Client> {
     const client = await this.clientRepository.getById(clientId);
-    if (!client) throw new NotFoundError('Client not found');
+    if (!client) {
+      throw new NotFoundError('Client not found');
+    }
     return client;
   }
 

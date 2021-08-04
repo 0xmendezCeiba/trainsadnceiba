@@ -37,7 +37,9 @@ export class ClientRepositoryPostgres implements ClientRepository {
 
   public async getById(id: number):Promise<Client | null> {
     const record = await this.repository.findOne(id);
-    if (record) return new Client(record.fullName, record.identityCode, +record.balance);
+    if (record) {
+      return new Client(record.fullName, record.identityCode, +record.balance);
+    }
     return null;
   }
 
