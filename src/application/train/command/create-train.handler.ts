@@ -14,7 +14,7 @@ export class CreateTrainHandler {
       createTrainCommand.passengerLimit,
       createTrainCommand.color
     );
-    return await this.createTrainService.execute(train);
+    return this.createTrainService.execute(train);
   }
 
 }

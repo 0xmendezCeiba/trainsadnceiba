@@ -19,8 +19,7 @@ export class PassengerBoardingRepositoryPostgres implements PassengerBoardingRep
     entity.clientId = passengerBoarding.getClientId;
     entity.routeAssignId = passengerBoarding.getRouteAssignId;
     entity.createdAt = new Date();
-    return await this.repository.save(entity);
-
+    return this.repository.save(entity);
   }
 
   async getLastPassengerBoardingForClient(clientId: number): Promise<PassengerBoarding | null> {

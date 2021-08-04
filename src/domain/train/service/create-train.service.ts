@@ -16,7 +16,7 @@ export class CreateTrainService {
   }
 
   async execute(train: Train) {
-    return await this.trainRepository.create(train);
+    return this.trainRepository.create(train);
   }
 
 }

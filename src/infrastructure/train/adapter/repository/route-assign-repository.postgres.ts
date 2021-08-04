@@ -22,7 +22,7 @@ export class RouteAssignRepositoryPostgres implements RouteAssignRepository {
     entity.startAt = routeAssign.getStartAt;
     entity.endAt = routeAssign.getEndAt;
     entity.createdAt = new Date();
-    return await this.repository.save(entity);
+    return this.repository.save(entity);
   }
 
   async getById(id: number) {

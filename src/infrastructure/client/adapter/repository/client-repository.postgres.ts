@@ -24,7 +24,7 @@ export class ClientRepositoryPostgres implements ClientRepository {
     entity.balance = client.getBalance;
     entity.identityCode = client.getIdentityCode;
     entity.createdAt = new Date();
-    return await this.repository.save(entity);
+    return this.repository.save(entity);
   }
 
   public async update(id: number, client: Client) {
@@ -32,7 +32,7 @@ export class ClientRepositoryPostgres implements ClientRepository {
     entity.fullName = client.getFullName;
     entity.balance = client.getBalance;
     entity.identityCode = client.getIdentityCode;
-    return await this.repository.save(entity);
+    return this.repository.save(entity);
   }
 
   public async getById(id: number):Promise<Client | null> {

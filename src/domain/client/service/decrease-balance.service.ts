@@ -30,7 +30,7 @@ export class DecreaseBalanceService {
     const client = await this.validateClientExists(decreaseBalance.getClientId);
     await this.validateDecrementValue(client.getBalance, decreaseBalance.getValue);
     const newBalance = client.getBalance - decreaseBalance.getValue;
-    return await this.clientRepository.update(
+    return this.clientRepository.update(
       decreaseBalance.getClientId,
       new Client(client.getFullName, client.getIdentityCode, newBalance)
     );

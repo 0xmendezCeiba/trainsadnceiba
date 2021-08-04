@@ -19,13 +19,13 @@ export class TrainController {
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async create(@Body() createTrainCommand: CreateTrainCommand) {
-    return await this.createTrainHandler.execute(createTrainCommand);
+    return this.createTrainHandler.execute(createTrainCommand);
   }
 
   @Post('/route')
   @UsePipes(new ValidationPipe({ transform: true }))
   async assignRoute(@Body() assignRouteCommand: AssignRouteCommand) {
-    return await this.assignRouteHandler.execute(assignRouteCommand);
+    return this.assignRouteHandler.execute(assignRouteCommand);
   }
 
   @Post('/passenger')

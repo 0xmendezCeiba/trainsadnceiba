@@ -11,7 +11,7 @@ export class AddPassengerHandler {
 
   public async execute(addPassengerCommand: AddPassengerCommand) {
     const passengerBoarding = new PassengerBoarding(addPassengerCommand.routeAssignId, addPassengerCommand.clientId);
-    return await this.addPassengerService.execute(passengerBoarding);
+    return this.addPassengerService.execute(passengerBoarding);
   }
   
 }

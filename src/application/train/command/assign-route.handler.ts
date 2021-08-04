@@ -17,7 +17,7 @@ export class AssignRouteHandler {
       assignRouteCommand.passengerPrice,
       assignRouteCommand.roadCode,
     );
-    return await this.assignRouteService.execute(routeAssign);
+    return this.assignRouteService.execute(routeAssign);
   }
 
 }

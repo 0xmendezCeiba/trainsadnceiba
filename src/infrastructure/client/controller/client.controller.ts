@@ -16,13 +16,13 @@ export class ClientController {
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   public async create(@Body() createClientCommand: CreateClientCommand) {
-    return await this.createClientHandler.execute(createClientCommand);
+    return this.createClientHandler.execute(createClientCommand);
   }
 
   @Post('/balance')
   @UsePipes(new ValidationPipe({ transform: true }))
   public async increaseBalance(@Body() increaseBalanceCommand: IncreaseBalanceCommand) {
-    return await this.increaseBalanceHandler.execute(increaseBalanceCommand);
+    return this.increaseBalanceHandler.execute(increaseBalanceCommand);
   }
 
 }

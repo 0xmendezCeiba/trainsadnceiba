@@ -63,7 +63,7 @@ export class AddPassengerService {
 
     const assignRouteRecord = await this.assignRouteService.getById(passengerBoarding.getRouteAssignId);
     await this.decreaseBalanceService.execute(new BalanceChange(passengerBoarding.getClientId, assignRouteRecord.getPassengerPrice));
-    return await this.passengerBoardingRepository.create(passengerBoarding);
+    return this.passengerBoardingRepository.create(passengerBoarding);
   }
 
 }

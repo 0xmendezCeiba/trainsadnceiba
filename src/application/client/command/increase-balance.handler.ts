@@ -14,6 +14,6 @@ export class IncreaseBalanceHandler {
       increaseBalanceCommand.clientId,
       increaseBalanceCommand.value
     );
-    return await this.increaseBalanceService.execute(balanceIncrement);
+    return this.increaseBalanceService.execute(balanceIncrement);
   }
 }

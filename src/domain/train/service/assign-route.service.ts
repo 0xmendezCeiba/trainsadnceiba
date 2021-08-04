@@ -1,8 +1,8 @@
 import { RouteAssign } from '../model/route-assign';
 import { CreateTrainService } from '../service/create-train.service';
 import { RouteAssignRepository } from '../port/repository/route-assign.repository';
-import { DomainError } from 'src/domain/errors/domain.error'
-import { NotFoundError } from 'src/domain/errors/not-found.error'
+import { DomainError } from 'src/domain/errors/domain.error';
+import { NotFoundError } from 'src/domain/errors/not-found.error';
 
 export class AssignRouteService {
 
@@ -38,8 +38,7 @@ export class AssignRouteService {
     await this.validateTrainExists(routeAssign.getTrainId);
     await this.validateFreeRoads(routeAssign.getStartAt, routeAssign.getEndAt, routeAssign.getRoadCode);
     await this.validateFreeTrain(routeAssign.getTrainId, routeAssign.getStartAt, routeAssign.getEndAt);
-
-    return await this.routeAssignRepository.create(routeAssign);
+    return this.routeAssignRepository.create(routeAssign);
   }
 
   public async isAvalaibleRouteAssignWithId(id: number): Promise<Boolean> {
@@ -57,7 +56,7 @@ export class AssignRouteService {
   }
 
   public async getById(id: number) {
-    return await this.routeAssignRepository.getById(id);
+    return this.routeAssignRepository.getById(id);
   }
 
 }

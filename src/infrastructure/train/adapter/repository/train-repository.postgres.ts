@@ -19,7 +19,7 @@ export class TrainRepositoryPostgres implements TrainRepository {
     entity.color = train.getColor;
     entity.passengerLimit = train.getPassengerLimit;
     entity.createdAt = new Date();
-    return await this.repository.save(entity);
+    return this.repository.save(entity);
   }
 
   async getById(id: number): Promise<Train | null> {

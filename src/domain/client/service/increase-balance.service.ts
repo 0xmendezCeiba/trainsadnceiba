@@ -18,7 +18,7 @@ export class IncreaseBalanceService {
   public async execute(increaseBalance: BalanceChange) {
     const client = await this.validateClientExists(increaseBalance.getClientId);
     const newBalance = client.getBalance + increaseBalance.getValue;
-    return await this.clientRepository.update(
+    return this.clientRepository.update(
       increaseBalance.getClientId,
       new Client(client.getFullName, client.getIdentityCode, newBalance)
     );
