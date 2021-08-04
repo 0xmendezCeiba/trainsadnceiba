@@ -14,7 +14,7 @@ export class ClientRepositoryPostgres implements ClientRepository {
     private readonly repository: Repository<ClientEntity>,
   ) {}
 
-  public async existsIdentityCode(identityCode: string): Promise<Boolean> {
+  public async existsIdentityCode(identityCode: string): Promise<boolean> {
     return (await this.repository.count({ identityCode })) > 0;
   }
 

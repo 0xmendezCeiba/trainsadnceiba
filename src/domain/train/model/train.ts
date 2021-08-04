@@ -23,7 +23,7 @@ export class Train {
   }
 
   private validateRequiredColorLength(color: string) {
-    if (color.length !== 7) {
+    if (color.length !== REQUIRED_COLOR_LENGTH) {
       throw new InvalidValueError(`The color length must be ${REQUIRED_COLOR_LENGTH}`);
     }
   }
