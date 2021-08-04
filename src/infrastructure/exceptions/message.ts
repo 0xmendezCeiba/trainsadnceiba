@@ -4,4 +4,3 @@ export interface Message {
   path: string;
   message: string;
 }
-  

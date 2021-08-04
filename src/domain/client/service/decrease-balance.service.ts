@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
 import { BalanceChange } from '../model/balance-change';
+import { DomainError } from 'src/domain/errors/domain.error';
 import { ClientRepository } from '../port/repository/client.repository';
 import { Client } from '../model/client';
 import { NotFoundError } from 'src/domain/errors/not-found.error';
-import { DomainError } from 'src/domain/errors/domain.error';
 
 Injectable()
 export class DecreaseBalanceService {

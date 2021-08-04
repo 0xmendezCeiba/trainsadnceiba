@@ -4,4 +4,4 @@ import { ClientRepositoryPostgres } from 'src/infrastructure/client/adapter/repo
 export const clientRepositoryProvider = {
   provide: ClientRepository,
   useClass: ClientRepositoryPostgres,
-}
+};

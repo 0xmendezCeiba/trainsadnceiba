@@ -31,6 +31,6 @@ export class TrainRepositoryPostgres implements TrainRepository {
       );
     }
     return null;
-  };
+  }
 
 }
