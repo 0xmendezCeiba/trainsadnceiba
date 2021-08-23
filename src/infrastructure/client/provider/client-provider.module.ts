@@ -10,15 +10,19 @@ import { decreaseBalanceServiceProvider } from './service/decrease-balance-servi
 import { CreateClientService } from 'src/domain/client/service/create-client.service';
 import { IncreaseBalanceService } from 'src/domain/client/service/increase-balance.service';
 import { clientRepositoryProvider } from './repository/client-repository.provider';
+import { clientDaoProvider } from './dao/client-dao.provider';
 import { DecreaseBalanceService } from 'src/domain/client/service/decrease-balance.service';
 import { ClientRepository } from 'src/domain/client/port/repository/client.repository';
+import { SearchClientHandler } from 'src/application/client/query/search-client.handler';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ClientEntity])],
   providers: [
     clientRepositoryProvider,
+    clientDaoProvider,
     CreateClientHandler,
     IncreaseBalanceHandler,
+    SearchClientHandler,
     {
       provide: CreateClientService,
       inject: [ClientRepository],
@@ -38,6 +42,7 @@ import { ClientRepository } from 'src/domain/client/port/repository/client.repos
   exports: [
     CreateClientHandler,
     IncreaseBalanceHandler,
+    SearchClientHandler,
     CreateClientService,
     IncreaseBalanceService,
     DecreaseBalanceService,

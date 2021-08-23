@@ -41,6 +41,10 @@ export class RouteAssign {
     }
   }
 
+  public isFreeBetween(startAt: Date, endAt: Date): boolean {
+    return this.getEndAt.getTime() < startAt.getTime() || endAt.getTime() < this.startAt.getTime()
+  }
+
   get getTrainId() {
     return this.traintId;
   }

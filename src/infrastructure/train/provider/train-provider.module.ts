@@ -5,10 +5,14 @@ import { TrainRepository } from 'src/domain/train/port/repository/train.reposito
 import { RouteAssignRepository } from 'src/domain/train/port/repository/route-assign.repository';
 import { PassengerBoardingRepository } from 'src/domain/train/port/repository/passenger-boarding.repository';
 import { trainRepositoryProvider } from './repository/train-repository.provider';
+import { trainDAOProvider } from './dao/train-dao.provider';
+import { routeAssignDAOProvider } from './dao/route-assign-dao.postgres';
 import { passengerBoardingRepositoryProvider } from './repository/passenger-boarding-repository.provider';
 import { routeAssignRepositoryProvider } from './repository/assign-route-repository.provider';
 import { CreateTrainHandler } from 'src/application/train/command/create-train.handler';
+import { ListRouteAssignHandler } from 'src/application/train/query/list-route-assign';
 import { AddPassengerHandler } from 'src/application/train/command/add-passenger.handler';
+import { ListTrainsHandler } from 'src/application/train/query/list-trains.handler';
 import { AssignRouteHandler } from 'src/application/train/command/assign-route.handler';
 import { CreateTrainService } from 'src/domain/train/service/create-train.service';
 import { DecreaseBalanceService } from 'src/domain/client/service/decrease-balance.service';
@@ -30,11 +34,15 @@ import { RouteAssignEntity } from '../entity/route-assign.entity';
   ],
   providers: [
     trainRepositoryProvider,
+    trainDAOProvider,
+    routeAssignDAOProvider,
     routeAssignRepositoryProvider,
     passengerBoardingRepositoryProvider,
     CreateTrainHandler,
     AssignRouteHandler,
     AddPassengerHandler,
+    ListRouteAssignHandler,
+    ListTrainsHandler,
     {
       provide: CreateTrainService,
       inject: [TrainRepository],
@@ -54,6 +62,8 @@ import { RouteAssignEntity } from '../entity/route-assign.entity';
   exports: [
     CreateTrainHandler,
     AssignRouteHandler,
+    ListTrainsHandler,
+    ListRouteAssignHandler,
     AddPassengerHandler,
     CreateTrainService,
     AddPassengerService,

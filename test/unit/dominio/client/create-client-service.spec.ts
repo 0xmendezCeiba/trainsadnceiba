@@ -4,7 +4,6 @@ import { ClientRepository } from 'src/domain/client/port/repository/client.repos
 import { SinonStubbedInstance } from 'sinon';
 import { createStubObj } from '../../../util/create-object.stub';
 
-
 describe('CreateClientService', () => {
 
   let createClientService: CreateClientService;

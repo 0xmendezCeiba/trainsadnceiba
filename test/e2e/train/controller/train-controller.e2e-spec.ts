@@ -31,6 +31,10 @@ import { createSandbox, SinonStubbedInstance } from 'sinon';
 import { createStubObj } from '../../../util/create-object.stub';
 import { Client } from 'src/domain/client/model/client';
 import { Train } from 'src/domain/train/model/train';
+import { ListTrainsHandler } from 'src/application/train/query/list-trains.handler';
+import { ListRouteAssignHandler } from 'src/application/train/query/list-route-assign';
+import { RouteAssignDAO } from 'src/domain/train/port/dao/route-assign.dao';
+import { TrainDAO } from 'src/domain/train/port/dao/train.dao';
 
 const sinonSandbox = createSandbox();
 
@@ -41,6 +45,8 @@ describe('Trains controller test', () => {
   let routeAssignRepository: SinonStubbedInstance<RouteAssignRepository>;
   let passengerBoardingRepository: SinonStubbedInstance<PassengerBoardingRepository>;
   let clientRepository: SinonStubbedInstance<ClientRepository>;
+  let routeAssignDao: SinonStubbedInstance<RouteAssignDAO>;
+  let trainDao: SinonStubbedInstance<TrainDAO>;
 
 
   beforeAll(async () => {
@@ -63,6 +69,8 @@ describe('Trains controller test', () => {
       'create',
       'getLastPassengerBoardingForClient'
     ], sinonSandbox);
+    routeAssignDao = createStubObj<RouteAssignDAO>(['listAll'], sinonSandbox);
+    trainDao = createStubObj<TrainDAO>(['listAll'], sinonSandbox);
 
     const moduleRef = await Test.createTestingModule({
       controllers: [TrainController],
@@ -97,9 +105,13 @@ describe('Trains controller test', () => {
         { provide: RouteAssignRepository, useValue: routeAssignRepository },
         { provide: PassengerBoardingRepository, useValue: passengerBoardingRepository },
         { provide: ClientRepository, useValue: clientRepository },
+        { provide: TrainDAO, useValue: trainDao },
+        { provide: RouteAssignDAO, useValue: routeAssignDao },
         AssignRouteHandler,
         AddPassengerHandler,
         CreateTrainHandler,
+        ListTrainsHandler,
+        ListRouteAssignHandler,
       ],
     }).compile();
   
@@ -119,37 +131,6 @@ describe('Trains controller test', () => {
   afterAll(async () => {
     await app.close();
   });
-
-
-  it('Must fail to create train, passenger limit not positive', async () => {
-    const train: CreateTrainCommand = {
-      color: '#fffff',
-      passengerLimit: 0,
-    };
-    const message = 'The passenger limit value must be an integer greater or equal to 1';
-    
-    const response = await request(app.getHttpServer())
-      .post('/trains').send(train)
-      .expect(HttpStatus.BAD_REQUEST);
-    expect(response.body.message).toBe(message);
-    expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
-  });
-
-
-  it('Must fail to create train, color length not equal to 7', async () => {
-    const train: CreateTrainCommand = {
-      color: '#ffff',
-      passengerLimit: 10,
-    };
-    const message = 'The color length must be 7';
-  
-    const response = await request(app.getHttpServer())
-      .post('/trains').send(train)
-      .expect(HttpStatus.BAD_REQUEST);
-    expect(response.body.message).toBe(message);
-    expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
-  });
-
 
   it('Success to create train', async () => {
     const train: CreateTrainCommand = {
@@ -174,150 +155,6 @@ describe('Trains controller test', () => {
       .expect(HttpStatus.CREATED);
     expect(response.body).toStrictEqual(expectedData);
   });
-
-  it('Must fail to create route assign, passenger price not positive', async () => {
-    const assignRoute: AssignRouteCommand = {
-      trainId: 10,
-      roadCode: '1235',
-      startAt: new Date('2021-07-20T08:10:24.857Z'),
-      endAt: new Date('2021-07-20T11:41:24.787Z'),
-      passengerPrice: -1,
-    };
-    const message = 'The passenger price value must be greater or equal to 0';
-    
-    const response = await request(app.getHttpServer())
-      .post('/trains/route').send(assignRoute)
-      .expect(HttpStatus.BAD_REQUEST);
-    expect(response.body.message).toBe(message);
-    expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
-  });
-
-
-  it('Must fail to create route assign, road code is empty', async () => {
-    const assignRoute: AssignRouteCommand = {
-      trainId: 10,
-      roadCode: '',
-      startAt: new Date('2021-07-20T08:10:24.857Z'),
-      endAt: new Date('2021-07-20T11:41:24.787Z'),
-      passengerPrice: 10,
-    };
-    const message = 'The road code value is empty';
-    
-    const response = await request(app.getHttpServer())
-      .post('/trains/route').send(assignRoute)
-      .expect(HttpStatus.BAD_REQUEST);
-    expect(response.body.message).toBe(message);
-    expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
-  });
-
-
-  it('Must fail to create route assign, invalid interval time', async () => {
-    const assignRoute: AssignRouteCommand = {
-      trainId: 10,
-      roadCode: '12365',
-      startAt: new Date('2021-09-20T08:10:24.857Z'),
-      endAt: new Date('2021-07-20T11:41:24.787Z'),
-      passengerPrice: 10,
-    };
-    const message = 'The time interval is invalid';
-    
-    const response = await request(app.getHttpServer())
-      .post('/trains/route').send(assignRoute)
-      .expect(HttpStatus.BAD_REQUEST);
-    expect(response.body.message).toBe(message);
-    expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
-  });
-
-
-  it('Must fail to create route assign, train not found', async () => {
-    const assignRoute: AssignRouteCommand = {
-      trainId: 10,
-      roadCode: '12365',
-      startAt: new Date('2021-07-20T08:10:24.857Z'),
-      endAt: new Date('2021-07-20T11:41:24.787Z'),
-      passengerPrice: 10,
-    };
-    trainRepository.getById.returns(Promise.resolve(null));
-    const message = 'Train not found';
-    
-    const response = await request(app.getHttpServer())
-      .post('/trains/route').send(assignRoute)
-      .expect(HttpStatus.NOT_FOUND);
-    expect(response.body.message).toBe(message);
-    expect(response.body.statusCode).toBe(HttpStatus.NOT_FOUND);
-  });
-
-
-  it('Must fail to create route assign, busy road', async () => {
-    const assignRoute: AssignRouteCommand = {
-      trainId: 10,
-      roadCode: '12365',
-      startAt: new Date('2021-07-20T08:10:24.857Z'),
-      endAt: new Date('2021-07-20T11:41:24.787Z'),
-      passengerPrice: 10,
-    };
-    trainRepository.getById.returns(Promise.resolve(
-      new Train(20, '#656565'),
-    ));
-    routeAssignRepository.getBetweenDates.returns(
-      Promise.resolve([
-        new RouteAssign(
-          6,
-          new Date('2021-07-20T07:10:24.857Z'),
-          new Date('2021-07-20T08:15:24.857Z'),
-          56,
-          assignRoute.roadCode,
-        )
-      ])
-    );
-    const message = `This time interval is busy for road ${assignRoute.roadCode}`;
-    
-    const response = await request(app.getHttpServer())
-      .post('/trains/route').send(assignRoute)
-      .expect(HttpStatus.BAD_REQUEST);
-    expect(response.body.message).toBe(message);
-    expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
-  });
-
-
-  it('Must fail to create route assign, busy train', async () => {
-    const assignRoute: AssignRouteCommand = {
-      trainId: 10,
-      roadCode: '12365',
-      startAt: new Date('2021-07-20T08:10:24.857Z'),
-      endAt: new Date('2021-07-20T11:41:24.787Z'),
-      passengerPrice: 10,
-    };
-    trainRepository.getById.returns(Promise.resolve(
-      new Train(20, '#656565'),
-    ));
-    routeAssignRepository.getBetweenDates.returns(
-      Promise.resolve([
-        new RouteAssign(
-          6,
-          new Date('2021-07-20T07:10:24.857Z'),
-          new Date('2021-07-20T08:15:24.857Z'),
-          56,
-          '11111',
-        ),
-        new RouteAssign(
-          10,
-          new Date('2021-07-20T10:10:24.857Z'),
-          new Date('2021-07-20T12:15:24.857Z'),
-          16,
-          '1111112',
-        ),
-      ])
-    );
-    const message = 'Train busy for time interval';
-    
-    const response = await request(app.getHttpServer())
-      .post('/trains/route').send(assignRoute)
-      .expect(HttpStatus.BAD_REQUEST);
-    expect(response.body.message).toBe(message);
-    expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
-  });
-
 
   it('Success to create route assign', async () => {
     const assignRoute: AssignRouteCommand = {
@@ -364,75 +201,6 @@ describe('Trains controller test', () => {
       .expect(HttpStatus.CREATED);
     expect(response.body).toStrictEqual(expectedData);
   });
-
-
-  it('Must fail to create passenger boarding, client not found', async () => {
-    const assignRoute: AddPassengerCommand = { clientId: 10, routeAssignId: 5 };
-    clientRepository.getById.returns(Promise.resolve(null));
-    const message = 'Client not found';
-    
-    const response = await request(app.getHttpServer())
-      .post('/trains/passenger').send(assignRoute)
-      .expect(HttpStatus.NOT_FOUND);
-    expect(response.body.message).toBe(message);
-    expect(response.body.statusCode).toBe(HttpStatus.NOT_FOUND);
-  });
-
-
-  it('Must fail to create passenger boarding, route assign not found', async () => {
-    const assignRoute: AddPassengerCommand = { clientId: 10, routeAssignId: 5 };
-    clientRepository.getById.returns(Promise.resolve(new Client('User', '123456', 10)));
-    routeAssignRepository.getById.returns(Promise.resolve(null))
-    const message = 'Route assign not found';
-    
-    const response = await request(app.getHttpServer())
-      .post('/trains/passenger').send(assignRoute)
-      .expect(HttpStatus.NOT_FOUND);
-    expect(response.body.message).toBe(message);
-    expect(response.body.statusCode).toBe(HttpStatus.NOT_FOUND);
-  });
-
-
-  it('Must fail to create passenger boarding, route assign not available', async () => {
-    const assignRoute: AddPassengerCommand = { clientId: 10, routeAssignId: 5 };
-    clientRepository.getById.returns(Promise.resolve(new Client('User', '123456', 10)));
-    const currentTime = new Date().getTime()
-    routeAssignRepository.getById.returns(Promise.resolve(
-      new RouteAssign(15, new Date(currentTime - 20000000), new Date(currentTime - 10000000), 15, '1447'),
-    ));
-    const message = 'Route assign not available';
-    
-    const response = await request(app.getHttpServer())
-      .post('/trains/passenger').send(assignRoute)
-      .expect(HttpStatus.BAD_REQUEST);
-    expect(response.body.message).toBe(message);
-    expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
-  });
-
-
-  it('Must fail to create passenger boarding, insufficient balance', async () => {
-    const assignRoute: AddPassengerCommand = { clientId: 10, routeAssignId: 5 };
-    const client = new Client('User', '123456', 5);
-    clientRepository.getById.returns(Promise.resolve(client));
-    const currentTime = new Date().getTime()
-    routeAssignRepository.getById.returns(Promise.resolve(
-      new RouteAssign(70, new Date(currentTime + 20000000), new Date(currentTime + 40000000), 15, '1447'),
-    ));
-    passengerBoardingRepository.getLastPassengerBoardingForClient.returns(Promise.resolve(null));
-    clientRepository.update.returns(Promise.resolve({
-      id: assignRoute.clientId,
-      fullName: client.getFullName,
-      balance: client.getBalance,
-      identityCode: client.getIdentityCode,
-    }));
-    const message = 'Insufficient balance';
-    
-    const response = await request(app.getHttpServer())
-      .post('/trains/passenger').send(assignRoute)
-      .expect(HttpStatus.BAD_REQUEST);
-    expect(response.body.message).toBe(message);
-  });
-
 
   it('Success to create passenger boarding', async () => {
     const assignRoute: AddPassengerCommand = { clientId: 10, routeAssignId: 5 };

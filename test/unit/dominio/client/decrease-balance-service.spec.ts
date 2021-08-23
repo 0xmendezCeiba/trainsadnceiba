@@ -1,4 +1,3 @@
-import { CreateClientService } from 'src/domain/client/service/create-client.service';
 import { DecreaseBalanceService } from 'src/domain/client/service/decrease-balance.service';
 import { Client } from 'src/domain/client/model/client';
 import { BalanceChange } from 'src/domain/client/model/balance-change';
@@ -6,7 +5,7 @@ import { ClientRepository } from 'src/domain/client/port/repository/client.repos
 import { SinonStubbedInstance } from 'sinon';
 import { createStubObj } from '../../../util/create-object.stub';
 
-describe('CreateClientService', () => {
+describe('DecreaseBalanceService', () => {
 
   let decreaseBalanceService: DecreaseBalanceService;
   let clientRepositoryStub: SinonStubbedInstance<ClientRepository>;

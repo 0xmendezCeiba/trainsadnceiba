@@ -45,6 +45,65 @@ describe('Route assign', () => {
   });
 
 
+  it('The route assign is not free', () => {
+    const currentTime = new Date().getTime();
+    const routeAssign = new RouteAssign(
+      1,
+      new Date(currentTime - 20000000),
+      new Date(currentTime + 10000000),
+      5,
+      '1235');
+    expect(routeAssign.isFreeBetween(
+      new Date(currentTime),
+      new Date(currentTime + 5000000),
+    )).toStrictEqual(false);
+  });
+
+  it('The route assign is not free', () => {
+    const currentTime = new Date().getTime();
+    const routeAssign = new RouteAssign(
+      1,
+      new Date(currentTime - 20000000),
+      new Date(currentTime + 10000000),
+      5,
+      '1235');
+    expect(routeAssign.isFreeBetween(
+      new Date(currentTime),
+      new Date(currentTime + 50000000),
+    )).toStrictEqual(false);
+  });
+
+  
+  it('The route assign is not free', () => {
+    const currentTime = new Date().getTime();
+    const routeAssign = new RouteAssign(
+      1,
+      new Date(currentTime - 20000000),
+      new Date(currentTime + 10000000),
+      5,
+      '1235');
+    expect(routeAssign.isFreeBetween(
+      new Date(currentTime - 50000000),
+      new Date(currentTime),
+    )).toStrictEqual(false);
+  });
+
+
+  it('The route assign is free', () => {
+    const currentTime = new Date().getTime();
+    const routeAssign = new RouteAssign(
+      1,
+      new Date(currentTime),
+      new Date(currentTime + 10000000),
+      5,
+      '1235');
+    expect(routeAssign.isFreeBetween(
+      new Date(currentTime + 50000000),
+      new Date(currentTime + 60000000),
+    )).toStrictEqual(true);
+  });
+
+
   it('Success to create route assign', () => {
     const currentTime = new Date().getTime();
     const startAt = new Date(currentTime + 10000000);

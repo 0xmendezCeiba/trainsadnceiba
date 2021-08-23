@@ -47,8 +47,7 @@ export class AddPassengerService {
       
       const currentRouteAssign = await this.assignRouteService.getById(passengerBoarding.getRouteAssignId);
       const lastRouteAssign = await this.assignRouteService.getById(lastPassengerBoarding.getRouteAssignId);
-      const isValidOverlappingRoad = currentRouteAssign.getEndAt.getTime() < lastRouteAssign.getStartAt.getTime() ||
-        lastRouteAssign.getEndAt.getTime() < currentRouteAssign.getStartAt.getTime();
+      const isValidOverlappingRoad = currentRouteAssign.isFreeBetween(lastRouteAssign.getStartAt, lastRouteAssign.getEndAt);
       if (!isValidOverlappingRoad) {
         throw new DomainError('Overlapping routes assing');
       }
