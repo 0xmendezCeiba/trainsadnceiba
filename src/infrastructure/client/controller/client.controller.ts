@@ -23,7 +23,7 @@ export class ClientController {
 
   @Get()
   public async getByIdentityCode(@Query('identityCode') identityCode: string) {
-    return this.searchClientHandler.execute(identityCode || '');
+    return this.searchClientHandler.execute(identityCode);
   }
 
   @Post('/balance')
