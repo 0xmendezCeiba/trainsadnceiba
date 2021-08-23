@@ -12,4 +12,4 @@ export class ListRouteAssignHandler {
     return this.routeAssignDao.listAll();
   }
 
-};
+}

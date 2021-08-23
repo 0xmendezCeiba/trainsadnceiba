@@ -4,4 +4,4 @@ export abstract class RouteAssignDAO {
 
   abstract listAll(): Promise<RouteAssignDTO[]>;
 
-};
+}

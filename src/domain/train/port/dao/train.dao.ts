@@ -4,4 +4,4 @@ export abstract class TrainDAO {
 
   abstract listAll(): Promise<TrainDTO[]>;
 
-};
+}

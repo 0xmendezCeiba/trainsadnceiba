@@ -23,4 +23,4 @@ export class TrainDAOPostgres implements TrainDAO {
     `);
   }
 
-};
+}

@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { ClientDAO } from "src/domain/client/port/dao/client.dao";
+import { ClientDAO } from 'src/domain/client/port/dao/client.dao';
 import { ClientDTO } from './dto/client.dto';
 
 @Injectable()
